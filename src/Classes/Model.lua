@@ -4,6 +4,7 @@ local DataStoreService = game:GetService("DataStoreService")
 local Classes = script.Parent
 local Key = require(Classes.Key)
 local Query = require(Classes.Query)
+local Transaction = require(Classes.Transaction)
 
 local class = {}
 class.__index = class
@@ -38,6 +39,10 @@ function class:NewKey(index: string): table
 	return Key.new(self, index)
 end
 
+function class:NewTransaction()
+	return Transaction.new(self)
+end
+
 local constructor = {}
 
 function constructor.new(name: string, scope: string?, datastoreService: any?): table
@@ -47,6 +52,7 @@ function constructor.new(name: string, scope: string?, datastoreService: any?): 
 	}
 
 	self.Query = Query.new(self)
+	self.Session = Transaction.new(self, true)
 
 	return setmetatable(self, class)
 end

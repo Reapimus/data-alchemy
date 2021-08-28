@@ -42,7 +42,7 @@ function class:Commit()
 								old[name] = column:deserialize(val)
 							end
 						end
-						local newData, newKeyInfo = action.func(old, oldKeyInfo)
+						local newData, newKeyInfo, metaData = action.func(old, oldKeyInfo)
 
 						if newData then
 							for name, val in pairs(newData) do
@@ -53,12 +53,16 @@ function class:Commit()
 							end
 						end
 
-						return newData, newKeyInfo
+						return newData, newKeyInfo, metaData
 					end)
 				end)
 
 				if success then
 					table.insert(succeeded, action)
+					table.insert(results, {
+						Values = result;
+						KeyInfo = keyInfo;
+					})
 				else
 					failed = true
 					break
@@ -106,7 +110,7 @@ function class:Commit()
 								end
 								table.insert(results, {
 									Values = oldData;
-									KeyIfo = oldKeyInfo
+									KeyInfo = oldKeyInfo
 								})
 							else
 								table.insert(results, {})
@@ -147,6 +151,9 @@ function class:Commit()
 			self.__committing = false
 			reject("One of the transactions failed and all successful actions had to be rolled back")
 		else
+			if self.__autoflush then
+				self:Flush()
+			end
 			self.__committing = false
 			resolve(results)
 		end
@@ -159,11 +166,12 @@ end
 
 local constructor = {}
 
-function constructor.new(model)
+function constructor.new(model: table, autoFlush: boolean): table
 	return setmetatable({
 		__model = model;
 		__actions = {};
 		__committing = false;
+		__autoflush = autoFlush;
 	}, class)
 end
 
