@@ -11,7 +11,7 @@ class.__newindex = function()
 	error("This class is read-only!", 2)
 end
 
-function class:FilterByKey(key: string, version: number?): table
+function class:FilterByKey(key: string, version: number?)
 	local model = self.__model
 	local datastore = model.__datastore
 
@@ -25,23 +25,28 @@ function class:FilterByKey(key: string, version: number?): table
 		end)
 
 		if success then
-			local result = model:NewKey(key)
-			if keyInfo then
-				result:__SetKeyInfo(keyInfo)
-			end
+			if value then
+				local result = model:NewKey(key)
+				if keyInfo then
+					result:__SetKeyInfo(keyInfo)
+				end
 
-			for name, column in pairs(model:GetColumnList()) do
-				result[name] = column:deserialize(value[name]) or column.Default
-			end
+				print(value)
+				for name, column in pairs(model:GetColumnList()) do
+					result[name] = column:deserialize(value[name]) or column.Default
+				end
 
-			resolve(result)
+				resolve(result)
+			else
+				resolve(nil)
+			end
 		else
 			reject(value)
 		end
 	end)
 end
 
-function class:FilterByPrefix(prefix: string?, pageSize: int?)
+function class:FilterByPrefix(prefix: string?, pageSize: number?)
 	local model = self.__model
 	local datastore = model.__datastore
 
@@ -58,7 +63,7 @@ function class:FilterByPrefix(prefix: string?, pageSize: int?)
 	end)
 end
 
-function class:FilterByKeyVersion(key: string, sortDirection: Enum.SortDirection?, minDate: int?, maxDate: int?, pageSize: int?)
+function class:FilterByKeyVersion(key: string, sortDirection: Enum.SortDirection?, minDate: number?, maxDate: number?, pageSize: number?)
 	local model = self.__model
 	local datastore = model.__datastore
 

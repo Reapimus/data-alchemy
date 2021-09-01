@@ -15,9 +15,11 @@ function class:validate(value)
 	if type(value) == "string" then
 		return #value <= self.MAXLENGTH
 	end
+	return false
 end
 
 function class:serialize(value)
+	if value == nil then return nil end
 	return tostring(value)
 end
 

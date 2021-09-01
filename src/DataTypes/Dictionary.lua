@@ -17,11 +17,11 @@ function class:validate(value)
 		if structure then
 			for name, value2 in pairs(value) do
 				if type(name) == "number" then
-					return false
+					return false, "Mixed dictionaries aren't supported by datastores"
 				end
 				if structure[name] then
 					if not structure[name]:validate(value2) then
-						return false
+						return false, "A value in the array has an invalid type"
 					end
 				else
 					warn(string.format("Unknown key '%s' in structure with value '%s'", name, tostring(value2)))
@@ -30,18 +30,24 @@ function class:validate(value)
 		else
 			for i, _ in pairs(value) do
 				if type(i) == "number" then
-					return false
+					return false, "Mixed dictionaries aren't supported by datastores"
 				end
 			end
-			return true
 		end
+		return true
 	else
 		return false
 	end
 end
 
 function class:serialize(value)
-	return value
+	local result = {}
+	if value then
+		for i, v in pairs(value) do
+			result[i] = self.__structure[i]:serialize(v)
+		end
+	end
+	return result
 end
 
 function class:deserialize(value)

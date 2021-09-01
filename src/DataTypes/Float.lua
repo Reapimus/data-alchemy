@@ -14,10 +14,12 @@ function class:validate(value)
 end
 
 function class:serialize(value)
+	if value == nil then return nil end
 	return tonumber(value)
 end
 
 function class:deserialize(value)
+	if value == nil then return nil end
 	return tonumber(value)
 end
 

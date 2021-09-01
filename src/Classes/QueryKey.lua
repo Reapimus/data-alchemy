@@ -9,7 +9,7 @@ class.__newindex = function()
 	error("This class is read-only!", 2)
 end
 
-function class:Get(version: number?): table
+function class:Get(version: number?)
 	local model = self.__model
 	local key = self.Name
 
@@ -22,7 +22,7 @@ end
 
 local constructor = {}
 
-function constructor.new(datastoreKey: DataStoreKey | DataStoreObjectVersionInfo, model: table, name: string?): table
+function constructor.new(datastoreKey: DataStoreKey | DataStoreObjectVersionInfo, model: table, name: string?): {}
 	if datastoreKey:IsA("DataStoreObjectVersionInfo") then
 		return setmetatable({
 			__key = datastoreKey;

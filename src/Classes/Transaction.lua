@@ -11,14 +11,17 @@ class.__newindex = function()
 end
 
 function class:Set(key: table, setoptions: DataStoreSetOptions)
+	assert(not self.__committing, "This transaction is currently committing and cannot be altered.")
 	table.insert(self.__actions, {action="SET", key=key, setoptions=setoptions})
 end
 
 function class:Update(key: string, func: any)
+	assert(not self.__committing, "This transaction is currently committing and cannot be altered.")
 	table.insert(self.__actions, {action="UPDATE", key=key, func=func})
 end
 
 function class:Remove(key: string, version: string?)
+	assert(not self.__committing, "This transaction is currently committing and cannot be altered.")
 	table.insert(self.__actions, {action="REMOVE", key=key, version=version})
 end
 
@@ -151,6 +154,17 @@ function class:Commit()
 			self.__committing = false
 			reject("One of the transactions failed and all successful actions had to be rolled back")
 		else
+			for name, column in pairs(model:GetColumnList()) do
+				if column.OnUpdate then
+					for i, action in pairs(self.__actions) do
+						local key = type(action.key) == "table" and action.key.__keyindex or action.key
+						pcall(function()
+							column.OnUpdate(key, results[i].Values[name])
+						end)
+					end
+				end
+			end
+
 			if self.__autoflush then
 				self:Flush()
 			end
@@ -166,7 +180,7 @@ end
 
 local constructor = {}
 
-function constructor.new(model: table, autoFlush: boolean): table
+function constructor.new(model: table, autoFlush: boolean): {}
 	return setmetatable({
 		__model = model;
 		__actions = {};

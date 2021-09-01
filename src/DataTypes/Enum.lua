@@ -16,11 +16,20 @@ function class:validate(value)
 end
 
 function class:serialize(value)
+	if value == nil then return nil end
 	return value.Value
 end
 
 function class:deserialize(value)
-	return self.ENUM[value]
+	if value then
+		for _, v in pairs(self.ENUM:GetEnumItems()) do
+			if v.Value == value then
+				return v
+			end
+		end
+	else
+		return nil
+	end
 end
 
 return function(enum: Enum)

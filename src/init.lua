@@ -9,7 +9,7 @@ module.Enum = require(script.DataTypes.Enum)
 module.Dictionary = require(script.DataTypes.Dictionary)
 module.Array = require(script.DataTypes.Array)
 
-module.Column = require(script.Classes.Model)
+module.Column = require(script.Classes.Column)
 module.Model = require(script.Classes.Model)
 
 return module

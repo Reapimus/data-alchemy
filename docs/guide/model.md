@@ -1,6 +1,3 @@
-!!! caution
-	This guide is still a work in progress, nothing here is guaranteed to be complete or fully explained yet.
-
 In Data-Alchemy, a `Model` is a class that allows you to define `Column` instances that define how the data in a Roblox Datastore should be treated and handled.
 
 A model can be defined as such:

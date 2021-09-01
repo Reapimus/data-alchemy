@@ -77,10 +77,10 @@ A Transaction instance for this model that will automatically flush the transact
 ### Column
 
 ```lua
-DataAlchemy.Column.new(type_, [default]) -> Column
+DataAlchemy.Column.new(type_, [default, [nullable, [onUpdate]]]) -> Column
 ```
 
-A class that represents how an index in the key structure should be treated.
+A class that represents how an index in the key structure should be treated. Default is an optional argument that specifies the default value for this column, it can be either a value or a function which returns a value, if it is a function, the first argument provided to the function will be the key's index. Nullable is an optional argument that specifies whether or not this value can be nil and onUpdate is a function fired for this column whenever a key gets updated, it will be fired with the key's index as the first argument and the key's value as the second argument.
 
 !!! info
 	The only functions this class has are intended for internal use only.

@@ -21,7 +21,7 @@ options:SetExperimentalFeatures{
 	v2 = true;
 }
 
-function class:GetColumn(name: string): table
+function class:GetColumn(name: string): {}
 	return self.__columns[name]
 end
 
@@ -35,7 +35,7 @@ function class:GetColumnList()
 	return columns
 end
 
-function class:NewKey(index: string): table
+function class:NewKey(index: string): {}
 	return Key.new(self, index)
 end
 
@@ -45,10 +45,10 @@ end
 
 local constructor = {}
 
-function constructor.new(name: string, scope: string?, datastoreService: any?): table
+function constructor.new(name: string, scope: string?, datastoreService: any?): {}
 	local self = {
 		__columns = {};
-		__datastore = (datastoreService or DataStoreService):GetDatastore(name, scope or "", options);
+		__datastore = (datastoreService or DataStoreService):GetDataStore(name, scope or nil, options);
 	}
 
 	self.Query = Query.new(self)

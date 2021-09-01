@@ -13,11 +13,13 @@ function class:validate(value)
 	return typeof(value) == "DateTime"
 end
 
-function class:serialize(value)
+function class:serialize(value: DateTime)
+	if value == nil then return nil end
 	return value:ToIsoDate()
 end
 
-function class:deserialize(value)
+function class:deserialize(value: string)
+	if value == nil then return nil end
 	return DateTime.fromIsoDate(value)
 end
 

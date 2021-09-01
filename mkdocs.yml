@@ -16,6 +16,7 @@ nav:
     - Installation: guide/installation.md
     - Models: guide/model.md
     - DataTypes: guide/datatypes.md
+    - Transactions: guide/transactions.md
   - API Reference: api-reference.md
 
 markdown_extensions:

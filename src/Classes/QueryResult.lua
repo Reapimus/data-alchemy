@@ -61,7 +61,7 @@ end
 
 local constructor = {}
 
-function constructor.new(datastoreKeyPages: DataStoreKeyPages | DataStoreVersionPages, model: table, name: string?): table
+function constructor.new(datastoreKeyPages: DataStoreKeyPages | DataStoreVersionPages, model: table, name: string?): {}
 	return setmetatable({
 		__pages = datastoreKeyPages;
 		__model = model;
