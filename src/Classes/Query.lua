@@ -16,32 +16,71 @@ function class:FilterByKey(key: string, version: number?)
 	local datastore = model.__datastore
 
 	return Promise.async(function(resolve, reject)
-		local success, value, keyInfo = pcall(function()
-			if version then
-				return datastore:GetVersionAsync(key, version)
-			else
-				return datastore:GetAsync(key)
-			end
+		local snapshotSuccess, snapshot, snapshotInfo = pcall(function()
+			return datastore:GetAsync(key.."_SNAPSHOT")
 		end)
 
-		if success then
-			if value then
-				local result = model:NewKey(key)
-				if keyInfo then
-					result:__SetKeyInfo(keyInfo)
-				end
+		if snapshotSuccess then
+			if snapshot and not version then
+				if os.time() - snapshotInfo.CreatedTime > 5 then
+					-- If the snapshot is older than 5 seconds, assume the server performing the transaction crashed and revert it.
+					local setoptions = Instance.new("DataStoreSetOptions")
+					setoptions:SetMetadata(snapshotInfo:GetMetadata())
+					datastore:SetAsync(key, snapshot, snapshotInfo:GetUserIds(), setoptions)
 
-				print(value)
-				for name, column in pairs(model:GetColumnList()) do
-					result[name] = column:deserialize(value[name]) or column.Default
-				end
+					local result = model:NewKey(key)
+					if snapshotInfo then
+						result:__SetKeyInfo(snapshotInfo)
+					end
 
-				resolve(result)
+					for name, column in pairs(model:GetColumnList()) do
+						result[name] = column:deserialize(snapshot[name]) or column.Default
+					end
+
+					resolve(result)
+				else
+					-- Return the snapshot instead of the actual value just in case the transaction fails while we are getting the key's value.
+					local result = model:NewKey(key)
+					if snapshotInfo then
+						result:__SetKeyInfo(snapshotInfo)
+					end
+
+					for name, column in pairs(model:GetColumnList()) do
+						result[name] = column:deserialize(snapshot[name]) or column.Default
+					end
+
+					resolve(result)
+				end
 			else
-				resolve(nil)
+				local success, value, keyInfo = pcall(function()
+					if version then
+						return datastore:GetVersionAsync(key, version)
+					else
+						return datastore:GetAsync(key)
+					end
+				end)
+
+				if success then
+					if value then
+						local result = model:NewKey(key)
+						if keyInfo then
+							result:__SetKeyInfo(keyInfo)
+						end
+
+						for name, column in pairs(model:GetColumnList()) do
+							result[name] = column:deserialize(value[name]) or column.Default
+						end
+
+						resolve(result)
+					else
+						resolve(nil)
+					end
+				else
+					reject(value)
+				end
 			end
 		else
-			reject(value)
+			reject(snapshot)
 		end
 	end)
 end

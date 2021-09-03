@@ -10,17 +10,25 @@ function class.new()
 end
 
 function class:validate(value)
-	return true
+	return typeof(value) == "NumberSequence"
 end
 
 function class:serialize(value)
 	if value == nil then return nil end
-	return value
+	local res = {}
+	for _, keypoint: NumberSequenceKeypoint in pairs(value.Keypoints) do
+		table.insert(res, {keypoint.Time,keypoint.Value,keypoint.Envelope})
+	end
+	return res
 end
 
 function class:deserialize(value)
 	if value == nil then return nil end
-	return value
+	local points = {}
+	for _, keypoint in pairs(value) do
+		table.insert(points, NumberSequenceKeypoint.new(unpack(keypoint)))
+	end
+	return NumberSequence.new(points)
 end
 
 return class.new()

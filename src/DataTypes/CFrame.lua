@@ -10,17 +10,17 @@ function class.new()
 end
 
 function class:validate(value)
-	return true
+	return typeof(value) == "CFrame"
 end
 
 function class:serialize(value)
 	if value == nil then return nil end
-	return value
+	return {value:GetComponents()}
 end
 
 function class:deserialize(value)
 	if value == nil then return nil end
-	return value
+	return CFrame.new(unpack(value))
 end
 
 return class.new()

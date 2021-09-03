@@ -35,96 +35,146 @@ function class:Commit()
 		local succeeded = {}
 		local results = {}
 		for _, action in pairs(self.__actions) do
-			if action.action == "UPDATE" then
-				local success, result, keyInfo = pcall(function()
-					return datastore:UpdateAsync(action.key, function(old, oldKeyInfo)
-						action.snapshot = {Util.deepcopy(old), oldKeyInfo:Clone()}
-						for name, val in pairs(old) do
-							local column = model:GetColumn(name)
-							if column then
-								old[name] = column:deserialize(val)
-							end
-						end
-						local newData, newKeyInfo, metaData = action.func(old, oldKeyInfo)
-
-						if newData then
-							for name, val in pairs(newData) do
-								local column = model:GetColumn(name)
-								if column then
-									newData[name] = column:serialize(val)
-								end
-							end
-						end
-
-						return newData, newKeyInfo, metaData
-					end)
-				end)
-
-				if success then
-					table.insert(succeeded, action)
-					table.insert(results, {
-						Values = result;
-						KeyInfo = keyInfo;
-					})
-				else
-					failed = true
-					break
+			local keyToUpdate do
+				if action.action == "UPDATE" or action.action == "REMOVE" then
+					keyToUpdate = action.key
+				elseif action.action == "SET" then
+					keyToUpdate = action.key.__keyindex
 				end
-			else
-				local successGet, resultGet, keyInfoGet = pcall(function()
-					return datastore:GetAsync(type(action.key) == "string" and action.key or action.key.__keyindex)
+			end
+			if action.action == "UPDATE" then
+				local snapshotGetSuccess, snapshot, snapshotInfo = pcall(function()
+					return datastore:GetAsync(keyToUpdate.."_SNAPSHOT")
 				end)
+				if snapshotGetSuccess then
+					if snapshot and os.time() - snapshotInfo.CreatedTime <= 5 then
+						reject("Another transaction is already processing this key.")
+					else
+						local success, result, keyInfo = pcall(function()
+							return datastore:UpdateAsync(keyToUpdate, function(old, oldKeyInfo)
+								if snapshot then
+									old = snapshot
+									oldKeyInfo = snapshotInfo
+								end
+								action.snapshot = {Util.deepcopy(old), oldKeyInfo}
+								for name, val in pairs(old) do
+									local column = model:GetColumn(name)
+									if column then
+										old[name] = column:deserialize(val)
+									end
+								end
+								local newData, newUserIds, metaData = action.func(old, oldKeyInfo)
 
-				if successGet then
-					action.snapshot = {resultGet, keyInfoGet}
+								if newData then
+									for name, val in pairs(newData) do
+										local column = model:GetColumn(name)
+										if column then
+											newData[name] = column:serialize(val)
+										end
+									end
+								end
 
-					if action.action == "SET" then
-						local success, version = pcall(function()
-							return datastore:SetAsync(action.key.__keyindex, action.key:serialize(), action.setoptions)
+								return newData, newUserIds, metaData
+							end)
 						end)
 
 						if success then
 							table.insert(succeeded, action)
 							table.insert(results, {
-								Version = version;
+								Values = result;
+								KeyInfo = keyInfo;
 							})
 						else
-							failed = true
-							break
-						end
-					elseif action.action == "REMOVE" then
-						local success, oldData, oldKeyInfo = pcall(function()
-							if action.version then
-								return datastore:RemoveVersionAsync(action.key, action.version)
-							else
-								return datastore:RemoveAsync(action.key)
-							end
-						end)
-
-						if success then
-							table.insert(succeeded, action)
-
-							if oldData and oldKeyInfo then
-								for name, val in pairs(oldData) do
-									local column = model:GetColumn(name)
-									if column then
-										oldData[name] = column:deserialize(val)
-									end
-								end
-								table.insert(results, {
-									Values = oldData;
-									KeyInfo = oldKeyInfo
-								})
-							else
-								table.insert(results, {})
-							end
-						else
-							failed = true
+							failed = result
 							break
 						end
 					end
 				else
-					failed = true
+					failed = snapshot
+				end
+			else
+				local successGet, resultGet, keyInfoGet = pcall(function()
+					return datastore:GetAsync(keyToUpdate)
+				end)
+
+				if successGet then
+					action.snapshot = {resultGet, keyInfoGet}
+
+					local snapshotSaveSuccess, result = pcall(function()
+						local snapshotExists = false
+						local snapshotInfo: DataStoreKeyInfo
+						datastore:UpdateAsync(keyToUpdate.."_SNAPSHOT", function(old, oldKeyInfo: DataStoreKeyInfo)
+							if old then
+								snapshotExists = old
+								snapshotInfo = oldKeyInfo
+								return nil
+							end
+							return resultGet, keyInfoGet:GetUserIds(), keyInfoGet:GetMetadata()
+						end)
+						if snapshotExists then
+							if os.time() - snapshotInfo.CreatedTime > 5 then
+								-- Assume a crash occurred at the time of this snapshot and revert it.
+								local setoptions = Instance.new("DataStoreSetOptions")
+								setoptions:SetMetadata(snapshotInfo:GetMetadata())
+								datastore:SetAsync(keyToUpdate, snapshotExists, snapshotInfo:GetUserIds(), setoptions)
+								datastore:RemoveAsync(keyToUpdate.."_SNAPSHOT")
+							end
+							error("Snapshot already exists, a transaction may have occurred when a server crashed.")
+						end
+					end)
+
+					if snapshotSaveSuccess then
+						if action.action == "SET" then
+							local success, version = pcall(function()
+								return datastore:SetAsync(keyToUpdate, action.key:serialize(), action.key.UserIds, action.setoptions)
+							end)
+
+							if success then
+								table.insert(succeeded, action)
+								table.insert(results, {
+									Version = version;
+								})
+							else
+								failed = version
+								break
+							end
+						elseif action.action == "REMOVE" then
+							local success, oldData, oldKeyInfo = pcall(function()
+								if action.version then
+									return datastore:RemoveVersionAsync(keyToUpdate, action.version)
+								else
+									return datastore:RemoveAsync(keyToUpdate)
+								end
+							end)
+
+							if success then
+								table.insert(succeeded, action)
+
+								if oldData and oldKeyInfo then
+									for name, val in pairs(oldData) do
+										local column = model:GetColumn(name)
+										if column then
+											oldData[name] = column:deserialize(val)
+										end
+									end
+									table.insert(results, {
+										Values = oldData;
+										KeyInfo = oldKeyInfo
+									})
+								else
+									table.insert(results, {})
+								end
+							else
+								failed = oldData
+								break
+							end
+						end
+					else
+						failed = result
+						break
+					end
+				else
+					failed = resultGet
 					break
 				end
 			end
@@ -137,11 +187,18 @@ function class:Commit()
 						if action.snapshot == nil then
 							datastore:RemoveAsync(type(action.key) == "string" and action.key or action.key.__keyindex)
 						else
-							datastore:SetAsync(type(action.key) == "string" and action.key or action.key.__keyindex, action.snapshot[1], action.snapshot[2])
+							local keyInfo: DataStoreKeyInfo = action.snapshot[2]
+							local setoptions = Instance.new("DataStoreSetOptions")
+							setoptions:SetMetadata(keyInfo:GetMetadata())
+							datastore:SetAsync(type(action.key) == "string" and action.key or action.key.__keyindex, action.snapshot[1], keyInfo:GetUserIds(), setoptions)
 						end
 					elseif action.action == "REMOVE" then
-						datastore:SetAsync(action.key, action.snapshot[1], action.snapshot[2])
+						local keyInfo: DataStoreKeyInfo = action.snapshot[2]
+						local setoptions = Instance.new("DataStoreSetOptions")
+						setoptions:SetMetadata(keyInfo:GetMetadata())
+						datastore:SetAsync(action.key, action.snapshot[1], keyInfo:GetUserIds(), setoptions)
 					end
+					datastore:RemoveAsync((type(action.key) == "string" and action.key or action.key.__keyindex).."_SNAPSHOT")
 				end)
 
 				if not success then
@@ -152,8 +209,33 @@ function class:Commit()
 			end
 
 			self.__committing = false
-			reject("One of the transactions failed and all successful actions had to be rolled back")
+			reject(string.format("One of the transactions failed and all successful actions had to be rolled back: %s\n%s", tostring(failed), debug.traceback()))
 		else
+			for _, action in pairs(succeeded) do
+				local keyToUpdate do
+					if action.action == "UPDATE" or action.action == "REMOVE" then
+						keyToUpdate = action.key
+					elseif action.action == "SET" then
+						keyToUpdate = action.key.__keyindex
+					end
+				end
+
+				local success, result
+				for i = 1, 3 do
+					success, result = pcall(function()
+						datastore:RemoveAsync(keyToUpdate.."_SNAPSHOT")
+					end)
+					if success then
+						break
+					else
+						task.wait()
+					end
+				end
+
+				if not success then
+					warn(string.format("Failed to remove snapshot for key '%s' with error: %s", keyToUpdate, result))
+				end
+			end
 			for name, column in pairs(model:GetColumnList()) do
 				if column.OnUpdate then
 					for i, action in pairs(self.__actions) do

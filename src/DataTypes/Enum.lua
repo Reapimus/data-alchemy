@@ -12,19 +12,27 @@ function class.new(enum: Enum)
 end
 
 function class:validate(value)
-	return typeof(value) == "EnumItem" and value.EnumType == self.ENUM
+	return typeof(value) == "EnumItem" and value.EnumType == self.ENUM or self.ENUM == Enum
 end
 
 function class:serialize(value)
 	if value == nil then return nil end
-	return value.Value
+	if self.ENUM == Enum then
+		return tostring(value)
+	else
+		return value.Value
+	end
 end
 
 function class:deserialize(value)
 	if value then
-		for _, v in pairs(self.ENUM:GetEnumItems()) do
-			if v.Value == value then
-				return v
+		if self.ENUM == Enum then
+			return Enum[value]
+		else
+			for _, v in pairs(self.ENUM:GetEnumItems()) do
+				if v.Value == value then
+					return v
+				end
 			end
 		end
 	else

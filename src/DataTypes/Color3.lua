@@ -10,17 +10,20 @@ function class.new()
 end
 
 function class:validate(value)
-	return true
+	return typeof(value) == "Color3"
 end
 
 function class:serialize(value)
 	if value == nil then return nil end
-	return value
+	local r,g,b = math.floor(value.R*255), math.floor(value.G*255), math.floor(value.B*255)
+    return string.format("#%X%X%X", r, g, b)
 end
 
 function class:deserialize(value)
 	if value == nil then return nil end
-	return value
+	value = value:gsub("#","")
+	local r, g, b = tonumber("0x"..value:sub(1,2)), tonumber("0x"..value:sub(3,4)), tonumber("0x"..value:sub(5,6))
+	return Color3.new(r,g,b)
 end
 
 return class.new()

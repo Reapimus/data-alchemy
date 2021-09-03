@@ -10,17 +10,17 @@ function class.new()
 end
 
 function class:validate(value)
-	return true
+	return typeof(value) == "BrickColor"
 end
 
 function class:serialize(value)
 	if value == nil then return nil end
-	return value
+	return value.Number
 end
 
 function class:deserialize(value)
 	if value == nil then return nil end
-	return value
+	return BrickColor.new(value)
 end
 
 return class.new()

@@ -18,9 +18,25 @@ The String DataType is a datatype specifying a string and uses a constructor tha
 
 ```lua
 DataAlchemy.Float -> Float
+DataAlchemy.Float(options) -> Float
 ```
 
 The Float DataType is a datatype specifying a number that may contain decimal places. It will only accept a number.
+
+When this is called like a constructor function, it should be provided a table of options as its first argument, these options can be:
+
+```lua
+{
+    Negative = boolean;
+    Positive = boolean;
+    Min = number;
+    Max = number;
+}
+```
+
+Negative & Positive will enforce a rule where the number provided must be negative or positive depending on which you set to true, you shouldn't enable both at once.
+
+Min and Max will enforce a rule where the number provided must be within the specified range (they can be specified on their own, without the presence of the other).
 
 ---
 
@@ -28,9 +44,12 @@ The Float DataType is a datatype specifying a number that may contain decimal pl
 
 ```lua
 DataAlchemy.Integer -> Integer
+DatAlchemy.Integer(options) -> Integer
 ```
 
 The Integer DataType is a datatype specifying a number that can only be a full number, it will only accept a number and will automatically round the number down to a full number.
+
+Integer has an identical constructor function to Float
 
 ---
 
@@ -80,6 +99,8 @@ DataAlchemy.Enum(enum) -> Enum
 
 The Enum DataType is a datatype specifying a Roblox enum to use for the key, the `enum` argument will only accept an Enum and is used to construct a Enum datatype that will validate and properly serialize/deserialize a value used for this key.
 
+Providing just the `Enum` container itself will make the Enum datatype only accept an Enum specifier (Meaning you should provide this key a value like `Enum.Material` instead of `Enum.Material.Air` for example).
+
 ---
 
 ## DateTime
@@ -89,3 +110,41 @@ DataAlchemy.DateTime -> DateTime
 ```
 
 The DateTime DataType is a datatype specifying a Roblox `DateTime` datatype, it will automatically handle serialization of the datatype to the datastore and deserialization when getting the key in order to make using them as painless as possible for the developer.
+
+---
+
+## Roblox DataTypes
+
+The following Roblox DataTypes have custom DataTypes specified in Data-Alchemy:
+
+* Axes
+* BrickColor
+* CFrame
+* Color3
+* ColorSequence
+* Faces
+* NumberRange
+* NumberSequence
+* Rect
+* Region3
+* Region3int16
+* UDim
+* UDim2
+* Vector2
+* Vector2int16
+* Vector3
+* Vector3int16
+
+---
+
+## Union
+
+```lua
+DataAlchemy.Union(datatype, ...) -> Union
+```
+
+The Union DataType is a datatype specifying a column that accepts any of the datatypes specified within the constructor. Example construction of a Union datatype could look like:
+
+```lua
+DataAlchemy.Union(DataAlchemy.String, DataAlchemy.Number, DataAlchemy.Boolean)
+```

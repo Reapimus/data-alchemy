@@ -83,3 +83,6 @@ It should also be noted that the function will return the results of each action
 
 !!! info
     For more information on the results of committing a `Transaction`, checkout the [API Reference](../../api-reference#transactioncommit) for what the results of an action may look like.
+
+!!! caution
+    When committing a Transaction, one GetAsync call (if not performing an Update operation), two SetAsync calls, and one Set/Update/RemoveAsync call are used per key due to the system making sure that a transaction failing due to a crash is still reverted
