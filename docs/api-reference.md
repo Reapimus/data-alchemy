@@ -238,7 +238,7 @@ An instance that handles multiple atomic interactions with a datastore, guarante
 ### Transaction:Set
 
 ```lua
-Transaction:Set(key)
+Transaction:Set(key, [setoptions])
 ```
 
 Creates an action in this transaction for a key in the datastore to be set using `SetAsync`
@@ -267,7 +267,7 @@ Transaction:Remove(index, [version])
 
 Creates an action in this transaction for a key to be removed from the datastore using `RemoveAsync`, or `RemoveVersionAsync` if a version is specified.
 
-`Index` must be a string
+`index` must be a string
 
 ---
 

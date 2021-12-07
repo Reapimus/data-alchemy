@@ -6,13 +6,7 @@
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
       "DataAlchemy": {
-        "$path": "src",
-        "Libraries": {
-          "$className": "Folder",
-          "Promise": {
-            "$path": "submodules/promise/lib"
-          }
-        }
+        "$path": "src"
       }
     }
   }
