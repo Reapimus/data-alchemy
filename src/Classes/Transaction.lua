@@ -52,6 +52,12 @@ function class:Commit()
 					else
 						local success, result, keyInfo = pcall(function()
 							return datastore:UpdateAsync(keyToUpdate, function(old, oldKeyInfo)
+								if old == nil then
+									old = {}
+									for i, v in pairs(model:GetColumnList()) do
+										old[i] = v.Default
+									end
+								end
 								if snapshot then
 									old = snapshot
 									oldKeyInfo = snapshotInfo
