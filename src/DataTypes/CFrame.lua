@@ -15,11 +15,13 @@ end
 
 function class:serialize(value)
 	if value == nil then return nil end
+	-- Serializes the CFrame as a table of its components
 	return {value:GetComponents()}
 end
 
 function class:deserialize(value)
 	if value == nil then return nil end
+	-- Deserializes the CFrame from a table of its components
 	return CFrame.new(unpack(value))
 end
 

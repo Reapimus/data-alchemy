@@ -20,6 +20,7 @@ function class:serialize(value)
 		local color = keypoint.Value
 		local r,g,b = math.floor(color.R*255), math.floor(color.G*255), math.floor(color.B*255)
     	local hex = string.format("#%X%X%X", r, g, b)
+		-- Store keypoint info to an array of times and hex strings (time, hex)
 		table.insert(res, {keypoint.Time,hex})
 	end
 	return res
@@ -32,6 +33,7 @@ function class:deserialize(value)
 		local hex = keypoint[2]
 		hex = hex:gsub("#","")
 		local r, g, b = tonumber("0x"..hex:sub(1,2)), tonumber("0x"..hex:sub(3,4)), tonumber("0x"..hex:sub(5,6))
+		-- Deserialize keypoint info from an array of times and hex strings (time, hex)
 		table.insert(points, ColorSequenceKeypoint.new(keypoint[1], Color3.new(r,g,b)))
 	end
 	return ColorSequence.new(points)

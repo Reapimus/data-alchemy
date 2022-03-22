@@ -15,11 +15,13 @@ end
 
 function class:serialize(value)
 	if value == nil then return nil end
+	-- Serializes the NumberRange as an array of numbers (min, max)
 	return {value.Min,value.Max}
 end
 
 function class:deserialize(value)
 	if value == nil then return nil end
+	-- Deserializes the NumberRange from an array of numbers (min, max)
 	return NumberRange.new(unpack(value))
 end
 

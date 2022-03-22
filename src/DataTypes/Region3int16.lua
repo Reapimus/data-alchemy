@@ -18,11 +18,13 @@ function class:serialize(value)
 	local cf, size = value.CFrame, value.Size
 	local regionStart = cf.Position - size/2
 	local regionEnd = cf.Position + size/2
+	-- Serialize region info to an array of numbers (x1, y1, z1, x2, y2, z2)
 	return {regionStart.X,regionStart.Y,regionStart.Z,regionEnd.X,regionEnd.Y,regionEnd.Z}
 end
 
 function class:deserialize(value)
 	if value == nil then return nil end
+	-- Deserialize region info from an array of numbers (x1, y1, z1, x2, y2, z2)
 	local regionStart = Vector3.new(value[1],value[2],value[3])
 	local regionEnd = Vector3.new(value[4],value[5],value[6])
 	return Region3int16.new(regionStart, regionEnd)

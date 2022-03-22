@@ -47,4 +47,5 @@ function class:deserialize(value)
 	return tonumber(value)
 end
 
+-- DataType is designed in a way so that it can be used as is, or to customize it by calling it with options.
 return class.new()

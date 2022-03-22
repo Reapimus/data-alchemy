@@ -15,11 +15,13 @@ end
 
 function class:serialize(value)
 	if value == nil then return nil end
+	-- Serializes the BrickColor using its number
 	return value.Number
 end
 
 function class:deserialize(value)
 	if value == nil then return nil end
+	-- Deserializes the BrickColor using its number
 	return BrickColor.new(value)
 end
 

@@ -16,6 +16,7 @@ end
 function class:serialize(value)
 	if value == nil then return nil end
 	local r,g,b = math.floor(value.R*255), math.floor(value.G*255), math.floor(value.B*255)
+	-- Serializes the color as a hex string (this might lose some precision? Probably worth it due to the amount of space it saves)
     return string.format("#%X%X%X", r, g, b)
 end
 
@@ -23,6 +24,7 @@ function class:deserialize(value)
 	if value == nil then return nil end
 	value = value:gsub("#","")
 	local r, g, b = tonumber("0x"..value:sub(1,2)), tonumber("0x"..value:sub(3,4)), tonumber("0x"..value:sub(5,6))
+	-- Deserializes the color from a hex string
 	return Color3.new(r,g,b)
 end
 

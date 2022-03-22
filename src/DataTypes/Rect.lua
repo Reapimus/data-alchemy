@@ -15,11 +15,13 @@ end
 
 function class:serialize(value)
 	if value == nil then return nil end
+	-- Serializes the Rect as an array of numbers (minX, minY, maxX, maxY)
 	return {value.Min.X,value.Min.Y,value.Max.X,value.Max.Y}
 end
 
 function class:deserialize(value)
 	if value == nil then return nil end
+	-- Deserializes the Rect from an array of numbers (minX, minY, maxX, maxY)
 	return Rect.new(unpack(value))
 end
 

@@ -17,10 +17,12 @@ function class:GetCurrent()
 
 	return Promise.async(function(resolve, reject)
 		local success, currentPage = pcall(function()
+			-- Try to get the current page
 			return pages:GetCurrentPage()
 		end)
 
 		if success then
+			-- If we got a page, convert all the keys into QueryKeys based on the model and resolve the promise
 			local result = {}
 
 			for _, datastoreKey in pairs(currentPage) do
@@ -42,10 +44,12 @@ function class:GetNext()
 			reject("No more pages to get")
 		else
 			local success, result = pcall(function()
+				-- Try to get the next page of results
 				pages:AdvanceToNextPageAsync()
 			end)
 
 			if success then
+				-- If we were successful, resolve the promise with the result
 				local ok, value = self:GetCurrent():await()
 				if ok then
 					resolve(value)

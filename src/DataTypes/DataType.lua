@@ -1,3 +1,4 @@
+-- Template file for all DataTypes
 local class = {}
 class.__index = class
 class.__newindex = function()

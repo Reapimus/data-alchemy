@@ -1,5 +1,6 @@
 local module = {}
 
+-- The main library module is just a ton of requires for main classes, and all the datatype modules for the Column class to use
 module.String = require(script.DataTypes.String)
 module.Float = require(script.DataTypes.Float)
 module.Integer = require(script.DataTypes.Integer)

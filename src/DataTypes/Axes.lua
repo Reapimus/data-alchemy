@@ -19,11 +19,12 @@ function class.new()
 end
 
 function class:validate(value)
-	return typeof(value) == "Faces"
+	return typeof(value) == "Axes"
 end
 
 function class:serialize(value)
 	if value == nil then return nil end
+	-- Serializes the Axes object into a 6 character string of 0's and 1's
 	local axises = {value.Top,value.Bottom,value.Front,value.Back,value.Left,value.Right}
 	local res = ""
 	for i = 1, 6 do
@@ -34,6 +35,7 @@ end
 
 function class:deserialize(value)
 	if value == nil then return nil end
+	-- Deserializes the 6 character string of 0's and 1's into a Axes object
 	local hasAxises = {}
 	for i = 1, 6 do
 		if string.sub(value, i, i) == "1" then

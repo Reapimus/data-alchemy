@@ -15,11 +15,13 @@ end
 
 function class:serialize(value)
 	if value == nil then return nil end
+	-- Serializes the UDim2 as an array of numbers (scaleX, offsetX, scaleY, offsetY)
 	return {value.X,value.Width,value.Y,value.Height}
 end
 
 function class:deserialize(value)
 	if value == nil then return nil end
+	-- Deserializes the UDim2 from an array of numbers (scaleX, offsetX, scaleY, offsetY)
 	return UDim2.new(unpack(value))
 end
 

@@ -19,6 +19,7 @@ function class:serialize(value)
 	for _, keypoint: NumberSequenceKeypoint in pairs(value.Keypoints) do
 		table.insert(res, {keypoint.Time,keypoint.Value,keypoint.Envelope})
 	end
+	-- Serializes the NumberSequence as an array of arrays (time, value, envelope)
 	return res
 end
 
@@ -28,6 +29,7 @@ function class:deserialize(value)
 	for _, keypoint in pairs(value) do
 		table.insert(points, NumberSequenceKeypoint.new(unpack(keypoint)))
 	end
+	-- Deserializes the NumberSequence from an array of arrays (time, value, envelope)
 	return NumberSequence.new(points)
 end
 

@@ -14,11 +14,13 @@ function class:validate(value)
 end
 
 function class:serialize(value)
-	return value
+	-- Serialize the boolean as 1 or 0 to save space
+	return value and 1 or 0
 end
 
 function class:deserialize(value)
-	return value
+	-- Deserialize the boolean from 1 or 0
+	return value == 1
 end
 
 return class.new()

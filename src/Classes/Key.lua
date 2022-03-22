@@ -24,6 +24,7 @@ class.__newindex = function(self, what: string, to: any)
 	end
 end
 class.__tostring = function(self): string
+	-- Return a string representation of the key, in the form of an xml/html tag style
 	local model = self.__model
 	local columnList = model:GetColumnList()
 
@@ -41,6 +42,7 @@ function class:GetMetadata(): {}
 end
 
 function class:SetMetadata(metadata: {})
+	-- Enforce that the metadata in json form does not exceed the maximum size of 300 characters
 	assert(#HttpService:JSONEncode(metadata) <= 300, "Metadata cannot exceed 300 characters")
 	rawset(self, "Metadata", metadata)
 end
@@ -56,6 +58,7 @@ end
 function class:serialize()
 	local result = {}
 
+	-- Serialize each individual column
 	for name, value in pairs(self.__values) do
 		local column = self.__model:GetColumn(name)
 		if column then
@@ -69,17 +72,21 @@ end
 local constructor = {}
 
 function constructor.new(model: table, index: string): {}
+	-- Enforce parameter restrictions
 	if type(index) == "number" then index = tostring(index) end
 	assert(model ~= nil, "Invalid argument #1 to Key.new (No Model object provided)")
 	assert(model.GetColumn ~= nil, "Invalid argument #1 to Key.new (Expected Model object)")
-	assert(index ~= nil, "Invalid argument #2 to Key.new (Index cannot  be nil)")
+	assert(index ~= nil, "Invalid argument #2 to Key.new (Index cannot be nil)")
 	assert(#index <= 50, "Invalid argument #2 to Key.new (Index cannot be longer than 50 characters)")
 	local values = {}
 
+	-- Enforce column specifics to prevent user errors
 	for name, column in pairs(model:GetColumnList()) do
+		-- Columns that aren't nullable must have a default value
 		if column.Default == nil and not column.Nullable then
 			error(string.format("Column '%s' has no default and is not nullable!", name), 2)
 		end
+		-- If the default value is a function, call it to get the default value for this key
 		if type(column.Default) == "function" then
 			values[name] = column.Default(index)
 		else

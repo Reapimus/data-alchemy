@@ -24,6 +24,7 @@ end
 
 function class:serialize(value)
 	if value == nil then return nil end
+	-- Serializes a Faces object into a 6 character string of 1's and 0's
 	local axises = {value.Top,value.Bottom,value.Front,value.Back,value.Left,value.Right}
 	local res = ""
 	for i = 1, 6 do
@@ -34,6 +35,7 @@ end
 
 function class:deserialize(value)
 	if value == nil then return nil end
+	-- Deserializes a 6 character string of 1's and 0's into a Faces object
 	local hasAxises = {}
 	for i = 1, 6 do
 		if string.sub(value, i, i) == "1" then
