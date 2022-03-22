@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
+     <loc>https://reapimus.github.io/data-alchemy/</loc>
+     <lastmod>2022-03-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://reapimus.github.io/data-alchemy/guide/installation/</loc>
+     <lastmod>2022-03-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://reapimus.github.io/data-alchemy/guide/model/</loc>
+     <lastmod>2022-03-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://reapimus.github.io/data-alchemy/guide/datatypes/</loc>
+     <lastmod>2022-03-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://reapimus.github.io/data-alchemy/guide/transactions/</loc>
+     <lastmod>2022-03-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://reapimus.github.io/data-alchemy/api-reference/</loc>
+     <lastmod>2022-03-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+</urlset>

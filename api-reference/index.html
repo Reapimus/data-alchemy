@@ -1,0 +1,1137 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <link rel="canonical" href="https://reapimus.github.io/data-alchemy/api-reference/">
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.0">
+    
+    
+      
+        <title>API Reference - Data-Alchemy Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.bc7e593a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab28b872.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ef5552">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#classes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://reapimus.github.io/data-alchemy/" title="Data-Alchemy Documentation" class="md-header-nav__button md-logo" aria-label="Data-Alchemy Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Data-Alchemy Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              API Reference
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/Reapimus/data-alchemy/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Reapimus/data-alchemy
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://reapimus.github.io/data-alchemy/" title="Data-Alchemy Documentation" class="md-nav__button md-logo" aria-label="Data-Alchemy Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Data-Alchemy Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Reapimus/data-alchemy/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Reapimus/data-alchemy
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../guide/installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../guide/model/" class="md-nav__link">
+      Models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../guide/datatypes/" class="md-nav__link">
+      DataTypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../guide/transactions/" class="md-nav__link">
+      Transactions
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        API Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      API Reference
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model" class="md-nav__link">
+    Model
+  </a>
+  
+    <nav class="md-nav" aria-label="Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modelindex-column" class="md-nav__link">
+    Model[index] = column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelgetcolumn" class="md-nav__link">
+    Model:GetColumn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelgetcolumnlist" class="md-nav__link">
+    Model:GetColumnList
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelnewkey" class="md-nav__link">
+    Model:NewKey
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelnewtransaction" class="md-nav__link">
+    Model:NewTransaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelquery" class="md-nav__link">
+    Model.Query
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelsession" class="md-nav__link">
+    Model.Session
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#column" class="md-nav__link">
+    Column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key" class="md-nav__link">
+    Key
+  </a>
+  
+    <nav class="md-nav" aria-label="Key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keyuserids" class="md-nav__link">
+    Key.UserIds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyversion" class="md-nav__link">
+    Key.Version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keycreatedtime" class="md-nav__link">
+    Key.CreatedTime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyupdatedtime" class="md-nav__link">
+    Key.UpdatedTime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keygetmetadata" class="md-nav__link">
+    Key:GetMetadata
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    Query
+  </a>
+  
+    <nav class="md-nav" aria-label="Query">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#queryfilterbykey" class="md-nav__link">
+    Query:FilterByKey
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queryfilterbyprefix" class="md-nav__link">
+    Query:FilterByPrefix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queryfilterbykeyversion" class="md-nav__link">
+    Query:FilterByKeyVersion
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queryresult" class="md-nav__link">
+    QueryResult
+  </a>
+  
+    <nav class="md-nav" aria-label="QueryResult">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#queryresultgetcurrent" class="md-nav__link">
+    QueryResult:GetCurrent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queryresultgetnext" class="md-nav__link">
+    QueryResult:GetNext
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#querykey" class="md-nav__link">
+    QueryKey
+  </a>
+  
+    <nav class="md-nav" aria-label="QueryKey">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#querykeyname" class="md-nav__link">
+    QueryKey.Name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#querykeycreatedtime" class="md-nav__link">
+    QueryKey.CreatedTime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#querykeyisdeleted" class="md-nav__link">
+    QueryKey.IsDeleted
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#querykeyversion" class="md-nav__link">
+    QueryKey.Version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transaction" class="md-nav__link">
+    Transaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactionset" class="md-nav__link">
+    Transaction:Set
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactionupdate" class="md-nav__link">
+    Transaction:Update
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactionremove" class="md-nav__link">
+    Transaction:Remove
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactioncommit" class="md-nav__link">
+    Transaction:Commit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactionflush" class="md-nav__link">
+    Transaction:Flush
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model" class="md-nav__link">
+    Model
+  </a>
+  
+    <nav class="md-nav" aria-label="Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modelindex-column" class="md-nav__link">
+    Model[index] = column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelgetcolumn" class="md-nav__link">
+    Model:GetColumn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelgetcolumnlist" class="md-nav__link">
+    Model:GetColumnList
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelnewkey" class="md-nav__link">
+    Model:NewKey
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelnewtransaction" class="md-nav__link">
+    Model:NewTransaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelquery" class="md-nav__link">
+    Model.Query
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelsession" class="md-nav__link">
+    Model.Session
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#column" class="md-nav__link">
+    Column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key" class="md-nav__link">
+    Key
+  </a>
+  
+    <nav class="md-nav" aria-label="Key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keyuserids" class="md-nav__link">
+    Key.UserIds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyversion" class="md-nav__link">
+    Key.Version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keycreatedtime" class="md-nav__link">
+    Key.CreatedTime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keyupdatedtime" class="md-nav__link">
+    Key.UpdatedTime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keygetmetadata" class="md-nav__link">
+    Key:GetMetadata
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    Query
+  </a>
+  
+    <nav class="md-nav" aria-label="Query">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#queryfilterbykey" class="md-nav__link">
+    Query:FilterByKey
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queryfilterbyprefix" class="md-nav__link">
+    Query:FilterByPrefix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queryfilterbykeyversion" class="md-nav__link">
+    Query:FilterByKeyVersion
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queryresult" class="md-nav__link">
+    QueryResult
+  </a>
+  
+    <nav class="md-nav" aria-label="QueryResult">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#queryresultgetcurrent" class="md-nav__link">
+    QueryResult:GetCurrent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queryresultgetnext" class="md-nav__link">
+    QueryResult:GetNext
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#querykey" class="md-nav__link">
+    QueryKey
+  </a>
+  
+    <nav class="md-nav" aria-label="QueryKey">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#querykeyname" class="md-nav__link">
+    QueryKey.Name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#querykeycreatedtime" class="md-nav__link">
+    QueryKey.CreatedTime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#querykeyisdeleted" class="md-nav__link">
+    QueryKey.IsDeleted
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#querykeyversion" class="md-nav__link">
+    QueryKey.Version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transaction" class="md-nav__link">
+    Transaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactionset" class="md-nav__link">
+    Transaction:Set
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactionupdate" class="md-nav__link">
+    Transaction:Update
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactionremove" class="md-nav__link">
+    Transaction:Remove
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactioncommit" class="md-nav__link">
+    Transaction:Commit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transactionflush" class="md-nav__link">
+    Transaction:Flush
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Reapimus/data-alchemy/edit/master/docs/api-reference.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>API Reference</h1>
+                
+                <h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permanent link">&para;</a></h2>
+<h3 id="model">Model<a class="headerlink" href="#model" title="Permanent link">&para;</a></h3>
+<hr />
+<div class="highlight"><pre><span></span><code><span class="n">DataAlchemy</span><span class="p">.</span><span class="n">Model</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">datastoreName</span><span class="p">,</span> <span class="p">[</span><span class="n">datastoreScope</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Model</span>
+</code></pre></div>
+<p>A class that is the primary instance used in Data-Alchemy, it represents the structure that a datastore's contents should assume and enforces it.</p>
+<hr />
+<h4 id="modelindex-column">Model[index] = column<a class="headerlink" href="#modelindex-column" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Model</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">Column</span>
+</code></pre></div>
+<p>Sets the specified index in the model to a Column class which is used to represent what should be in that index in the structure of a key.</p>
+<hr />
+<h4 id="modelgetcolumn">Model:GetColumn<a class="headerlink" href="#modelgetcolumn" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Model</span><span class="p">:</span><span class="n">GetColumn</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Column</span> <span class="o">|</span> <span class="kc">nil</span>
+</code></pre></div>
+<p>Returns the Column at the specified index if it exists.</p>
+<hr />
+<h4 id="modelgetcolumnlist">Model:GetColumnList<a class="headerlink" href="#modelgetcolumnlist" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Model</span><span class="p">:</span><span class="n">GetColumnList</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="o">&lt;</span><span class="n">Column</span><span class="o">&gt;</span>
+</code></pre></div>
+<p>Returns all the Column instances in the model with their indexes being identical to their indexes in the model.</p>
+<hr />
+<h4 id="modelnewkey">Model:NewKey<a class="headerlink" href="#modelnewkey" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Model</span><span class="p">:</span><span class="n">NewKey</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Key</span>
+</code></pre></div>
+<p>Creates a new Key instance for this model with the specified index, which refers to the key it would represent in the datastore.</p>
+<hr />
+<h4 id="modelnewtransaction">Model:NewTransaction<a class="headerlink" href="#modelnewtransaction" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Model</span><span class="p">:</span><span class="n">NewTransaction</span><span class="p">()</span>
+</code></pre></div>
+<p>Creates a new Transaction instance for this datastore which can be used to perform multiple datastore interactions at once with the guarantee that it will only succeed if all the actions succeed.</p>
+<hr />
+<h4 id="modelquery">Model.Query<a class="headerlink" href="#modelquery" title="Permanent link">&para;</a></h4>
+<p>A Query instance for this model that allows you to perform queries on the datastore to get specified keys or list keys based on specifications.</p>
+<hr />
+<h4 id="modelsession">Model.Session<a class="headerlink" href="#modelsession" title="Permanent link">&para;</a></h4>
+<p>A Transaction instance for this model that will automatically flush the transaction as soon as the actions have been committed.</p>
+<hr />
+<h3 id="column">Column<a class="headerlink" href="#column" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">DataAlchemy</span><span class="p">.</span><span class="n">Column</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="p">[</span><span class="n">default</span><span class="p">,</span> <span class="p">[</span><span class="n">nullable</span><span class="p">,</span> <span class="p">[</span><span class="n">onUpdate</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="n">Column</span>
+</code></pre></div>
+<p>A class that represents how an index in the key structure should be treated. Default is an optional argument that specifies the default value for this column, it can be either a value or a function which returns a value, if it is a function, the first argument provided to the function will be the key's index. Nullable is an optional argument that specifies whether or not this value can be nil and onUpdate is a function fired for this column whenever a key gets updated, it will be fired with the key's index as the first argument and the key's value as the second argument.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The only functions this class has are intended for internal use only.</p>
+</div>
+<hr />
+<h3 id="key">Key<a class="headerlink" href="#key" title="Permanent link">&para;</a></h3>
+<p>A class that represents a key in the datastore.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This class is not intended to be created manually outside of internal functions that do so, anything that occurs as a result of creating one outside of an internal function will not be fixed.</p>
+</div>
+<hr />
+<h4 id="keyuserids">Key.UserIds<a class="headerlink" href="#keyuserids" title="Permanent link">&para;</a></h4>
+<p>An array of the UserIds associated with this key.</p>
+<hr />
+<h4 id="keyversion">Key.Version<a class="headerlink" href="#keyversion" title="Permanent link">&para;</a></h4>
+<p>The version of this key.</p>
+<hr />
+<h4 id="keycreatedtime">Key.CreatedTime<a class="headerlink" href="#keycreatedtime" title="Permanent link">&para;</a></h4>
+<p>The time this key was created at.</p>
+<hr />
+<h4 id="keyupdatedtime">Key.UpdatedTime<a class="headerlink" href="#keyupdatedtime" title="Permanent link">&para;</a></h4>
+<p>The time this key was last updated.</p>
+<hr />
+<h4 id="keygetmetadata">Key:GetMetadata<a class="headerlink" href="#keygetmetadata" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Key</span><span class="p">:</span><span class="n">GetMetadata</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="n">any</span><span class="o">&gt;</span>
+</code></pre></div>
+<p>Gets the metadata associated with this key.</p>
+<hr />
+<h3 id="query">Query<a class="headerlink" href="#query" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">Model</span><span class="p">.</span><span class="n">Query</span> <span class="o">-&gt;</span> <span class="n">Query</span>
+</code></pre></div>
+<p>An object that can perform queries on a Model's datastore.</p>
+<hr />
+<h4 id="queryfilterbykey">Query:FilterByKey<a class="headerlink" href="#queryfilterbykey" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Query</span><span class="p">:</span><span class="n">FilterByKey</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="n">version</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Key</span>
+</code></pre></div>
+<p>Queries the datastore for a specified key, with an optional version of the key to query for.</p>
+<hr />
+<h4 id="queryfilterbyprefix">Query:FilterByPrefix<a class="headerlink" href="#queryfilterbyprefix" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Query</span><span class="p">:</span><span class="n">FilterByPrefix</span><span class="p">([</span><span class="n">prefix</span><span class="p">,</span> <span class="p">[</span><span class="n">pageSize</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">QueryResult</span>
+</code></pre></div>
+<p>Queries the datastore for keys that start with the specified prefix or blank if not specified and returns a <code>QueryResult</code> instance that can be used to go through the results.</p>
+<hr />
+<h4 id="queryfilterbykeyversion">Query:FilterByKeyVersion<a class="headerlink" href="#queryfilterbykeyversion" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">Query</span><span class="p">:</span><span class="n">FilterByKeyVersion</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="n">sortDirection</span><span class="p">,</span> <span class="p">[</span><span class="n">minDate</span><span class="p">,</span> <span class="p">[</span><span class="n">maxDate</span><span class="p">,</span> <span class="p">[</span><span class="n">pageSize</span><span class="p">]]]])</span> <span class="o">-&gt;</span> <span class="n">QueryResult</span>
+</code></pre></div>
+<p>Queries the datastore for versions of the specified key, within the specified minimum and maximum date ranges or no date range if not specified and a sort direction if specified. Returns a <code>QueryResult</code> instance.</p>
+<hr />
+<h3 id="queryresult">QueryResult<a class="headerlink" href="#queryresult" title="Permanent link">&para;</a></h3>
+<p>An instance that is returned by some <code>Query</code> methods to search through the results of the query.</p>
+<hr />
+<h4 id="queryresultgetcurrent">QueryResult:GetCurrent<a class="headerlink" href="#queryresultgetcurrent" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">QueryResult</span><span class="p">:</span><span class="n">GetCurrent</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Promise</span>
+</code></pre></div>
+<p>Returns a promise which returns an array of <code>QueryKey</code> instances that represent keys in the query upon success.</p>
+<hr />
+<h4 id="queryresultgetnext">QueryResult:GetNext<a class="headerlink" href="#queryresultgetnext" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="n">QueryResult</span><span class="p">:</span><span class="n">GetNext</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Promise</span>
+</code></pre></div>
+<p>Attempts to advance to the next page of the query and then returns the results of <code>QueryResult:GetCurrent()</code></p>
+<hr />
+<h3 id="querykey">QueryKey<a class="headerlink" href="#querykey" title="Permanent link">&para;</a></h3>
+<p>An instance that provides information about a key returned from a <code>QueryResult</code></p>
+<hr />
+<h4 id="querykeyname">QueryKey.Name<a class="headerlink" href="#querykeyname" title="Permanent link">&para;</a></h4>
+<p>The name of the key in the datastore.</p>
+<hr />
+<h4 id="querykeycreatedtime">QueryKey.CreatedTime<a class="headerlink" href="#querykeycreatedtime" title="Permanent link">&para;</a></h4>
+<p>The time at which this key was created.</p>
+<hr />
+<h4 id="querykeyisdeleted">QueryKey.IsDeleted<a class="headerlink" href="#querykeyisdeleted" title="Permanent link">&para;</a></h4>
+<p>Whether or not this key was removed.</p>
+<hr />
+<h4 id="querykeyversion">QueryKey.Version<a class="headerlink" href="#querykeyversion" title="Permanent link">&para;</a></h4>
+<p>The version of this key.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p><code>Name</code> is the only property filled in if this <code>QueryKey</code> was generated from a <code>QueryResult</code> resulting from <code>Query:FilterByPrefix</code></p>
+</div>
+<hr />
+<h3 id="transaction">Transaction<a class="headerlink" href="#transaction" title="Permanent link">&para;</a></h3>
+<p>An instance that handles multiple atomic interactions with a datastore, guaranteeing that all interactions are successful or none go through.</p>
+<hr />
+<h3 id="transactionset">Transaction:Set<a class="headerlink" href="#transactionset" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">Transaction</span><span class="p">:</span><span class="n">Set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="n">setoptions</span><span class="p">])</span>
+</code></pre></div>
+<p>Creates an action in this transaction for a key in the datastore to be set using <code>SetAsync</code></p>
+<p><code>Key</code> must be a <code>Key</code> instance.</p>
+<hr />
+<h3 id="transactionupdate">Transaction:Update<a class="headerlink" href="#transactionupdate" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">Transaction</span><span class="p">:</span><span class="n">Update</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">updateFunc</span><span class="p">)</span>
+</code></pre></div>
+<p>Creates an action in this transaction for <code>UpdateAsync</code> to be used on the specified key index in the datastore.</p>
+<p><code>index</code> must be a string</p>
+<hr />
+<h3 id="transactionremove">Transaction:Remove<a class="headerlink" href="#transactionremove" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">Transaction</span><span class="p">:</span><span class="n">Remove</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="p">[</span><span class="n">version</span><span class="p">])</span>
+</code></pre></div>
+<p>Creates an action in this transaction for a key to be removed from the datastore using <code>RemoveAsync</code>, or <code>RemoveVersionAsync</code> if a version is specified.</p>
+<p><code>index</code> must be a string</p>
+<hr />
+<h3 id="transactioncommit">Transaction:Commit<a class="headerlink" href="#transactioncommit" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">Transaction</span><span class="p">:</span><span class="n">Commit</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Promise</span>
+</code></pre></div>
+<p>Commits all changes to the datastore, and if successful, the Promise will return an Array containing Dictionaries with the results of each action, in the order they were added to the transaction.</p>
+<p>The contents of the dictionary depend on the type of action:</p>
+<div class="highlight"><pre><span></span><code><span class="n">SET</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">Version</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">REMOVE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">Values</span><span class="p">;</span>
+    <span class="n">KeyInfo</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">UPDATE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">Values</span><span class="p">;</span>
+    <span class="n">KeyInfo</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="transactionflush">Transaction:Flush<a class="headerlink" href="#transactionflush" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">Transaction</span><span class="p">:</span><span class="n">Flush</span><span class="p">()</span>
+</code></pre></div>
+<p>Clears the transaction of all actions that had been assigned within it.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../guide/transactions/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Transactions
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.6a3d08fc.min.js"></script>
+      <script src="../assets/javascripts/bundle.71201edf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
